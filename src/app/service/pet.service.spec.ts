@@ -47,7 +47,7 @@ describe('PetService', () => {
     // then
     const request = httpTesting.expectOne('http://localhost:8080/pets');
     expect(request.request.method).toBe('GET');
-    // request.flush(petsResult);
+    request.flush(petsResult);
     expect(await pets).toEqual(petsResult);
   });
 });
