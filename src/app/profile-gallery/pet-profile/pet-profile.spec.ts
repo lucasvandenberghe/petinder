@@ -26,4 +26,11 @@ describe('PetProfile', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show the name and description of the pet recieved as input', async () => {
+    const petProfile = fixture.nativeElement as HTMLElement;
+
+    expect(petProfile.querySelector('h3')?.textContent).toBe('Princess');
+    expect(petProfile.querySelector('p')?.textContent).toBe('test');
+  });
 });
