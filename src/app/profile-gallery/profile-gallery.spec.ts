@@ -106,6 +106,10 @@ describe('ProfileGallery', () => {
       const displayedPets = gallery.querySelectorAll('.gallery-pet');
       expect(displayedPets.length).toBe(1);
       expect(displayedPets[0].textContent).toContain('Princess');
+      expect(gallery.textContent).not.toContain('MrFuzz');
+      expect(gallery.textContent).not.toContain('MrFuzz loves belly rubqs, and likes playing with pieces of string');
+      expect(gallery.textContent).not.toContain('Burt');
+      expect(gallery.textContent).not.toContain('Burt looks cute, but is in reality a though guy. Secretly wants to work for the FBI');
     });
 
     it('should make an unselected pet have the active class and show the profile text when it is clicked and undo both of those when clicking the pet again', async () => {
