@@ -1,0 +1,24 @@
+@if (pet.status() === 'loading') {
+  <p class="text-muted">Loading pet...</p>
+} @else if (pet.error()) {
+  <p class="alert alert-danger">Could not load the pet.</p>
+} @else if (pet.hasValue()) {
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="big-dialog">
+          <div class="clearfix">
+            <div class="pull-left dialog-picture">
+              <img class="small-profile-picture" [src]="baseApiUrl + '/' + pet.value().image" alt=""/>
+            </div>
+            <h3>{{ pet.value().name }}</h3>
+            <p>{{ pet.value().profileText }}</p>
+          </div>
+          <div class="clearfix">
+            <a class="btn btn-default" routerLink="/" >Back to the gallery</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
