@@ -99,4 +99,25 @@ describe('PetService', () => {
 
     expect((await sortedPets).map(pet => pet.name)).toEqual(petResultNamesSorted);
   });
+
+  it('sends an actual POST request with a new pet in the request body', async () => {
+    const newPet: Pet = {
+      id: 2,
+      name: 'test 2',
+      kind: 'dog',
+      image: 'images/test_2.jpg',
+      profileText: 'test',
+      popularity: 2,
+    };
+
+    const createdPet = firstValueFrom(service.addPet(newPet));
+
+    const request = httpTesting.expectOne('http://localhost:8080/pets');
+    expect(request.request.method).toBe('POST');
+    expect(request.request.body).toEqual(newPet);
+
+    request.flush(newPet);
+
+    expect(await createdPet).toEqual(newPet);
+  });
 });

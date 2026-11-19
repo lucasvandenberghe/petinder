@@ -5,11 +5,13 @@ import {environment} from '../../environments/environment';
 import {Pet} from '../model/pet';
 import {PetProfile} from './pet-profile/pet-profile';
 import {FormsModule} from '@angular/forms';
+import {AddPet} from './add-pet/add-pet';
 
 @Component({
   imports: [
     PetProfile,
-    FormsModule
+    FormsModule,
+    AddPet
   ],
   selector: 'app-profile-gallery',
   styleUrl: './profile-gallery.css',
@@ -22,8 +24,8 @@ export class ProfileGallery {
     defaultValue: []
   });
   protected readonly baseApiUrl = environment.backendUrl;
-  protected selectedPet = signal<Pet | undefined>(undefined);
-  protected readonly searchText = signal('');
+  protected readonly selectedPet = signal<Pet | undefined>(undefined);
+  protected searchText = signal('');
 
   protected selectPet(pet: Pet) {
     this.selectedPet.update(currentlySelectedPet => currentlySelectedPet === pet ? undefined : pet);
@@ -35,4 +37,10 @@ export class ProfileGallery {
     return [...this.pets.value()]
       .filter(pet => pet.name.toLowerCase().includes(this.searchText().toLowerCase()));
   });
+
+  protected showNewPet(pet: Pet) {
+    this.pets.reload();
+
+    this.selectPet(pet);
+  }
 }

@@ -1,0 +1,37 @@
+<section class="tiny-dialog">
+  <h3>Create a new pet</h3>
+
+  <form [formRoot]="petForm">
+    <div class="form-group" [class.has-error]="petForm.name().touched() && petForm.name().errors().length > 0">
+      <label for="name">Name</label>
+      <input id="name" [formField]="petForm.name" class="form-control" placeholder="Name"/>
+      @if (petForm.name().touched()) {
+        @for (error of petForm.name().errors(); track error) {
+          <p>{{ error.message }}</p>
+        }
+      }
+    </div>
+
+    <div class="form-group" [class.has-error]="petForm.kind().touched() && petForm.kind().errors().length > 0">
+      <label for="kind">Kind</label>
+      <input id="kind" [formField]="petForm.kind" class="form-control" placeholder="Kind"/>
+      @if (petForm.kind().touched()) {
+        @for (error of petForm.kind().errors(); track error) {
+          <p>{{ error.message }}</p>
+        }
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input [formField]="petForm.image" class="form-control" placeholder="Image"/>
+    </div>
+
+    <div class="form-group">
+      <label for="profileText">Profile text</label>
+      <input [formField]="petForm.profileText" class="form-control" placeholder="Profile text"/>
+    </div>
+
+    <button type="submit">Save</button>
+  </form>
+</section>
